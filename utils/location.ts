@@ -7,16 +7,14 @@ let map: google.maps.Map;
  */
 export const setPosition = ({ lat, lng }: { lat: number; lng: number }) => {
   // if position is default value, then skip loading
-  console.log("check1");
   if (lat === -200 && lng === -200) return;
   // load and render map
   loader.load().then(() => {
-    console.log("check2");
     map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
       center: { lat, lng },
       zoom: 20,
     });
-    console.log("map:", map);
+
     // render circle
     new google.maps.Circle({
       center: { lat, lng },
@@ -26,7 +24,31 @@ export const setPosition = ({ lat, lng }: { lat: number; lng: number }) => {
       fillColor: "#FF0000",
       fillOpacity: 0.35,
       map,
-      radius: 5,
+      radius: 2,
     });
+
+    /**
+     * direction renderer example
+     */
+    // // render direction
+    // const direction = new google.maps.DirectionsService();
+    // direction.route(
+    //   {
+    //     origin: { lat, lng },
+    //     destination: { lat: 35.7330201, lng: 139.8346616 },
+    //     travelMode: google.maps.TravelMode.WALKING,
+    //   },
+    //   (result, status) => {
+    //     if (status !== "OK") {
+    //       console.error("not OK!");
+    //       return;
+    //     } // create a DirectionRenderer object
+    //     const renderer = new google.maps.DirectionsRenderer();
+    //     // call setMap() on the renderer to bind it to the passed map
+    //     renderer.setMap(map);
+    //     // call setDirections() on the renderer, passing it the DirectionsResult
+    //     renderer.setDirections(result);
+    //   }
+    // );
   });
 };
