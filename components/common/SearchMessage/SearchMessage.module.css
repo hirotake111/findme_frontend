@@ -1,0 +1,30 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 30px;
+  height: 10vh;
+  width: 60vw;
+}
+
+.item {
+  font-size: 1.1rem;
+  color: #85837a;
+}
+
+.item_error {
+  font-size: 1.1rem;
+  color: #fa86a7;
+}
