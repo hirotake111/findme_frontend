@@ -16,7 +16,7 @@ describe("getDirection", () => {
         detail: { latitude: 1, longitude: 2 },
       })
     );
-    expect(await api.getDirection("xxx", "yyy")).toEqual({
+    expect(await api.getDirection("xxx")).toEqual({
       latitude: 1,
       longitude: 2,
     });
@@ -26,7 +26,7 @@ describe("getDirection", () => {
     expect.assertions(1);
     mockJson.mockReturnValue(Promise.resolve({ result: "not found" }));
     try {
-      await api.getDirection("xxx", "yyy");
+      await api.getDirection("xxx");
     } catch (e) {
       if (e instanceof Error)
         expect(e.message).toBe("failed to fetch data from API server");
@@ -40,7 +40,7 @@ describe("getDirection", () => {
       throw err;
     });
     try {
-      await api.getDirection("a", "b");
+      await api.getDirection("a");
     } catch (e) {
       expect(e).toBe(err);
     }

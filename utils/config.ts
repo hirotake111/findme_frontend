@@ -5,5 +5,5 @@ export const loader = new Loader({
 });
 
 export const config = {
-  ApiServerUrl: process.env.NEXT_PUBLIC_API_SERVER || "",
+  ApiServerUrl: process.env.NEXT_PUBLIC_API_SERVER || "http://localhost:3333",
 };

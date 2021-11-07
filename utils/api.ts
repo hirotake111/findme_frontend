@@ -1,15 +1,13 @@
 import { Position } from "./types";
 import { validatePosition } from "./validators";
+import { config } from "./config";
 
 /**
  * get position data from API server
  */
-const getDirection = async (
-  url: string,
-  positionId: string
-): Promise<Position> => {
+const getDirection = async (positionId: string): Promise<Position> => {
   try {
-    const requestUrl = `${url}/api/${positionId}`;
+    const requestUrl = `${config.ApiServerUrl}/api/${positionId}`;
     // get position data from API server
     const body = await fetch(requestUrl).then((res) => res.json());
     if (body.result !== "success")
