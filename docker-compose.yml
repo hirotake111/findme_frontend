@@ -1,0 +1,20 @@
+version: "3.7"
+
+services:
+  api: # api
+    image: findme-api-development # image for API server
+    container_name: findme-api
+    depends_on:
+      - redis
+    ports:
+      - 3001:3000
+    environment:
+      - NODE_ENV=development
+      - SECRETKEY=sssshhhhhi
+      - PORT=3000
+      - REDIS_URL=redis://findme-api-redis
+      - CORS=http://localhost:3000
+
+  redis: # Redis server
+    image: redis:6.2.0-alpine
+    container_name: findme-api-redis
