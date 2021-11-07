@@ -5,6 +5,7 @@ import { mapReducer } from "../mapReducer";
 const getFakeMapState = (): MapState => ({
   status: { status: "stop" },
   position: { latitude: -200, longitude: -200 },
+  direction: { latitude: -200, longitude: -200 },
 });
 
 it("should return default state", () => {
@@ -32,4 +33,12 @@ it("should update position", () => {
   const payload = { latitude: 0, longitude: 0 };
   const action: MapActionTypes = { type: "search/updatePosition", payload };
   expect(mapReducer(state, action)).toEqual({ ...state, position: payload });
+});
+
+it("should update direction", () => {
+  expect.assertions(1);
+  const state = getFakeMapState();
+  const payload = { latitude: 0, longitude: 0 };
+  const action: MapActionTypes = { type: "search/updateDirection", payload };
+  expect(mapReducer(state, action)).toEqual({ ...state, direction: payload });
 });

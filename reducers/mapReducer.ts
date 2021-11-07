@@ -6,6 +6,10 @@ const init: MapState = {
     latitude: -200,
     longitude: -200,
   },
+  direction: {
+    latitude: -200,
+    longitude: -200,
+  },
 };
 
 export const mapReducer: MapReducer = (state = init, action) => {
@@ -15,6 +19,9 @@ export const mapReducer: MapReducer = (state = init, action) => {
 
     case "search/updatePosition":
       return { ...state, position: action.payload };
+
+    case "search/updateDirection":
+      return { ...state, direction: action.payload };
 
     default:
       return state;

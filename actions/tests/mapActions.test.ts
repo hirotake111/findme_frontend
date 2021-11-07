@@ -1,4 +1,5 @@
 import {
+  updateDirectionAction,
   updateMapSearchStatusAction,
   updatePositionAction,
 } from "../mapActions";
@@ -19,6 +20,16 @@ describe("updatePositionAction", () => {
     expect(updatePositionAction({ latitude: 1, longitude: 2 })).toEqual({
       type: "search/updatePosition",
       payload: { latitude: 1, longitude: 2 },
+    });
+  });
+});
+
+describe("updateDirectionAction", () => {
+  it("should return action", () => {
+    expect.assertions(1);
+    expect(updateDirectionAction({ latitude: 2, longitude: 1 })).toEqual({
+      type: "search/updateDirection",
+      payload: { latitude: 2, longitude: 1 },
     });
   });
 });

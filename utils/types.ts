@@ -11,12 +11,12 @@ export type MapSearchStatus =
   | { status: "searching" }
   | { status: "error"; detail: string };
 
+export type Position = { latitude: number; longitude: number };
+
 export interface MapState {
   status: MapSearchStatus;
-  position: {
-    latitude: number;
-    longitude: number;
-  };
+  position: Position;
+  direction: Position;
 }
 
 export type MapReducer = Reducer<MapState, MapActionTypes>;

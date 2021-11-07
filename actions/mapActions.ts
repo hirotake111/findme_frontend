@@ -5,6 +5,7 @@ import { MapSearchStatus } from "../utils/types";
  */
 type UpdateMapSearchStatusType = "search/updateSearchStatus";
 type UpdatePositionType = "search/updatePosition";
+type UpdateDirectionType = "search/updateDirection";
 
 /**
  * Payload Types
@@ -27,6 +28,11 @@ interface UpdatePositionActionType
   type: UpdatePositionType;
   payload: UpdatePositionPayloadType;
 }
+interface UpdateDirectionActionType
+  extends PayloadAction<UpdatePositionPayloadType, UpdateDirectionType> {
+  type: UpdateDirectionType;
+  payload: UpdatePositionPayloadType;
+}
 
 /**
  * combined action types
@@ -34,7 +40,8 @@ interface UpdatePositionActionType
 export type MapActionTypes =
   | { type: "default" }
   | UpdateMapSearchStatusActionType
-  | UpdatePositionActionType;
+  | UpdatePositionActionType
+  | UpdateDirectionActionType;
 
 /**
  * Action Creators
@@ -49,5 +56,11 @@ export const updatePositionAction = (
   payload: UpdatePositionPayloadType
 ): UpdatePositionActionType => ({
   type: "search/updatePosition",
+  payload,
+});
+export const updateDirectionAction = (
+  payload: UpdatePositionPayloadType
+): UpdateDirectionActionType => ({
+  type: "search/updateDirection",
   payload,
 });
