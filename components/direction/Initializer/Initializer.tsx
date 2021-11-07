@@ -21,7 +21,6 @@ export default function Initializer({ positionId }: Props) {
         const body = await fetch(`${config.ApiServerUrl}/api/${positionId}`)
           .then((res) => res.json())
           .catch((err) => console.error("error:", err.message));
-        console.warn("body", body);
         if (body.result === "success") {
           // validate position data
           const { latitude, longitude } = validatePosition(body.detail);

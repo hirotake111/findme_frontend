@@ -2,7 +2,7 @@ import { Position } from "./types";
 
 export const validatePosition = (data: any): Position => {
   // validate data
-  if (!data) throw new Error("validation error - data is undefined");
+  if (!data) throw new Error(`validation error - data is ${data}`);
   const { latitude, longitude } = data;
   // validate latitude
   if (!(latitude && typeof latitude === "number"))

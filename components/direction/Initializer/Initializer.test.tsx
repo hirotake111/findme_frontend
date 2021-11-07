@@ -1,9 +1,14 @@
 import { render } from "@testing-library/react";
-import Container from "../../map/Container/Container";
+import { Provider } from "react-redux";
+import { store } from "../../../utils/store";
 import Initializer from "./Initializer";
 
 it("should reunder nothing", () => {
   expect.assertions(1);
-  const { container } = render(<Initializer positionId={""} />);
+  const { container } = render(
+    <Provider store={store}>
+      <Initializer positionId={""} />
+    </Provider>
+  );
   expect(container.firstChild).toBe(null);
 });
