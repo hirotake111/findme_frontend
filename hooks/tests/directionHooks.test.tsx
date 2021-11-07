@@ -21,9 +21,11 @@ describe("useUpdateDirection hook", () => {
   it("should update direction in redux store", async () => {
     expect.assertions(1);
     const position = { latitude: 20.0, longitude: 30.0 };
-    mockGetDirection.mockReturnValue(position);
-    const update = useUpdateDirection();
-    await update("xxxx");
+    mockGetDirection.mockReturnValue(Promise.resolve(position));
+    await renderHook(() => useUpdateDirection("xxx"));
+
+    // const update = useUpdateDirection();
+    // await update("xxxx");
     expect(mockDispatch).toHaveBeenCalledWith({
       type: "search/updateDirection",
       payload: position,
@@ -36,8 +38,7 @@ describe("useUpdateDirection hook", () => {
     mockGetDirection.mockImplementation(() => {
       throw err;
     });
-    const update = useUpdateDirection();
-    await update("xxxx");
+    await renderHook(() => useUpdateDirection("xxx"));
     expect(mockDispatch).toHaveBeenCalledWith({
       type: "search/updateSearchStatus",
       payload: { status: "error", detail: err },
