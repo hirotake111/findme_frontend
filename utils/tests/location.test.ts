@@ -19,7 +19,7 @@ describe("setPosition", () => {
   it("should perform loader callback", async () => {
     expect.assertions(1);
     try {
-      await setPosition({ lat: 100, lng: 100 });
+      await setPosition({ latitude: 100, longitude: 100 });
       expect(mockCallback).toHaveBeenCalledTimes(1);
     } catch (e) {
       throw e;
@@ -29,7 +29,7 @@ describe("setPosition", () => {
   it("should not perform loader callback if latitude and logitude is default value", async () => {
     expect.assertions(1);
     try {
-      await setPosition({ lat: -200, lng: -200 });
+      await setPosition({ latitude: -200, longitude: -200 });
       expect(mockCallback).toHaveBeenCalledTimes(0);
     } catch (e) {
       throw e;

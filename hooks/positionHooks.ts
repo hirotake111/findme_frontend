@@ -7,11 +7,12 @@ import { useAppSelector } from "./reduxHooks";
  * custom hook to update and return current position
  */
 export const useUpdateCurrentPosition = (): Position => {
-  const { latitude, longitude } = useAppSelector((state) => state.map.position);
+  const position = useAppSelector((state) => state.map.position);
 
   useEffect(() => {
-    setPosition({ lat: latitude, lng: longitude });
-  }, [latitude, longitude]);
+    // render Google Maps
+    setPosition(position);
+  }, [position]);
 
-  return { latitude, longitude };
+  return position;
 };

@@ -21,9 +21,6 @@ describe("useUpdateCurrentPosition", () => {
     mockSelector.mockReturnValue(position);
     const { result } = renderHook(() => useUpdateCurrentPosition());
     expect(result.current).toEqual(position);
-    expect(mockSetPosition).toHaveBeenCalledWith({
-      lat: position.latitude,
-      lng: position.longitude,
-    });
+    expect(mockSetPosition).toHaveBeenCalledWith(position);
   });
 });
