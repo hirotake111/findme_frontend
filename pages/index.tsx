@@ -1,6 +1,4 @@
 import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
 
 import SearchMessage from "../components/common/SearchMessage/SearchMessage";
 import Container from "../components/map/Container/Container";
