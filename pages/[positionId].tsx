@@ -1,6 +1,7 @@
 import { useRouter } from "next/dist/client/router";
+
+import Home from ".";
 import Initializer from "../components/direction/Initializer/Initializer";
-import Geolocation from "../components/map/Geolocation/Geolocation";
 
 export default function Direction() {
   const router = useRouter();
@@ -11,12 +12,11 @@ export default function Direction() {
       {typeof positionId === "string" ? (
         <>
           <Initializer positionId={positionId} />
-          <Geolocation />
+          <Home />
         </>
       ) : (
         <p>Error - invalid position ID: {positionId}</p>
       )}
-      <div>Position ID: {positionId}</div>
     </>
   );
 }

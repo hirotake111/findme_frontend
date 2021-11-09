@@ -7,12 +7,12 @@ import { useAppSelector } from "./reduxHooks";
  * custom hook to update and return current position
  */
 export const useUpdateCurrentPosition = (): Position => {
-  const position = useAppSelector((state) => state.map.position);
+  const { position, direction } = useAppSelector((state) => state.map);
 
   useEffect(() => {
     // render Google Maps
-    setPosition(position);
-  }, [position]);
+    setPosition({ position, destination: direction });
+  }, [position, direction]);
 
   return position;
 };
