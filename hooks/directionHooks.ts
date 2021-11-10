@@ -14,8 +14,18 @@ export const useUpdateDirection = async (positionId: string) => {
   useEffect(() => {
     (async () => {
       try {
-        const position = await api.getDirection(positionId);
-        dispatch({ type: "search/updateDirection", payload: position });
+        const data = await api.getDestination(positionId);
+        if (data.result === "success") {
+          // got destination position -> update store
+          return dispatch({
+            type: "search/updateDirection",
+            payload: data.position,
+          });
+        }
+        // TODO: code required -> show modal to input code
+        /**
+         *
+         */
       } catch (e) {
         dispatch({
           type: "search/updateSearchStatus",
