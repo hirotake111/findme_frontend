@@ -1,6 +1,7 @@
 import { useRouter } from "next/dist/client/router";
 
 import Home from ".";
+import CodeModal from "../components/common/modal/CodeModal/CodeModal";
 import Initializer from "../components/direction/Initializer/Initializer";
 
 export default function Direction() {
@@ -11,6 +12,7 @@ export default function Direction() {
     <>
       {typeof positionId === "string" ? (
         <>
+          <CodeModal />
           <Initializer positionId={positionId} />
           <Home />
         </>
