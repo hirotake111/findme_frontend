@@ -47,6 +47,9 @@ const getDestination = async (positionId: string): Promise<Result> => {
           position: validatePosition(body.detail),
         };
 
+      case "not found":
+        throw new Error("404 - data not found");
+
       default:
         throw new Error(body.detail);
     }

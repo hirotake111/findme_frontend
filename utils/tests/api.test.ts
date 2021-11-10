@@ -76,7 +76,7 @@ describe("getDestination", () => {
     });
   });
 
-  it("should throw an error if received error message", async () => {
+  it("should throw an error if received message 'not found'", async () => {
     expect.assertions(1);
     mockJson.mockReturnValue(
       Promise.resolve({ result: "not found", detail: "unable to find data" })
@@ -84,7 +84,19 @@ describe("getDestination", () => {
     try {
       await api.getDestination("xxx");
     } catch (e) {
-      if (e instanceof Error) expect(e.message).toBe("unable to find data");
+      if (e instanceof Error) expect(e.message).toBe("404 - data not found");
+    }
+  });
+
+  it("should throw an error if received any other error message", async () => {
+    expect.assertions(1);
+    mockJson.mockReturnValue(
+      Promise.resolve({ result: "bad request", detail: "invalid ID" })
+    );
+    try {
+      await api.getDestination("xxx");
+    } catch (e) {
+      if (e instanceof Error) expect(e.message).toBe("invalid ID");
     }
   });
 
