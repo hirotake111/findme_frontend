@@ -30,7 +30,7 @@ export const useUpdateDirection = async (positionId: string) => {
       } catch (e) {
         dispatch({
           type: "search/updateSearchStatus",
-          payload: { status: "error", detail: e as string },
+          payload: { status: "error", detail: `${e}` },
         });
       }
     })();

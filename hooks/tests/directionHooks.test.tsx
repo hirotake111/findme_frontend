@@ -57,7 +57,7 @@ describe("useUpdateDirection hook", () => {
     await renderHook(() => useUpdateDirection("xxx"));
     expect(mockDispatch).toHaveBeenCalledWith({
       type: "search/updateSearchStatus",
-      payload: { status: "error", detail: err },
+      payload: { status: "error", detail: `${err}` },
     });
   });
 });
