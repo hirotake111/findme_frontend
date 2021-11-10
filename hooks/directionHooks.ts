@@ -22,10 +22,11 @@ export const useUpdateDirection = async (positionId: string) => {
             payload: data.position,
           });
         }
-        // TODO: code required -> show modal to input code
-        /**
-         *
-         */
+        // code required -> show modal to input code
+        dispatch({
+          type: "search/toggleCodeModal",
+          payload: { codeModalEnabled: true },
+        });
       } catch (e) {
         dispatch({
           type: "search/updateSearchStatus",
