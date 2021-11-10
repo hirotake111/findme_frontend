@@ -10,6 +10,7 @@ const init: MapState = {
     latitude: -200,
     longitude: -200,
   },
+  codeModalEnabled: false,
 };
 
 export const mapReducer: MapReducer = (state = init, action) => {
@@ -22,6 +23,9 @@ export const mapReducer: MapReducer = (state = init, action) => {
 
     case "search/updateDirection":
       return { ...state, direction: action.payload };
+
+    case "search/toggleCodeModal":
+      return { ...state, codeModalEnabled: action.payload.codeModalEnabled };
 
     default:
       return state;

@@ -6,6 +6,7 @@ import { MapSearchStatus } from "../utils/types";
 type UpdateMapSearchStatusType = "search/updateSearchStatus";
 type UpdatePositionType = "search/updatePosition";
 type UpdateDirectionType = "search/updateDirection";
+type ToggleCodeModalType = "search/toggleCodeModal";
 
 /**
  * Payload Types
@@ -13,6 +14,9 @@ type UpdateDirectionType = "search/updateDirection";
 interface UpdatePositionPayloadType {
   latitude: number;
   longitude: number;
+}
+interface ToggleCodeModalPayloadType {
+  codeModalEnabled: boolean;
 }
 
 /**
@@ -33,6 +37,11 @@ interface UpdateDirectionActionType
   type: UpdateDirectionType;
   payload: UpdatePositionPayloadType;
 }
+interface ToggleCodeModalActionType
+  extends PayloadAction<ToggleCodeModalPayloadType, ToggleCodeModalType> {
+  type: ToggleCodeModalType;
+  payload: ToggleCodeModalPayloadType;
+}
 
 /**
  * combined action types
@@ -41,7 +50,8 @@ export type MapActionTypes =
   | { type: "default" }
   | UpdateMapSearchStatusActionType
   | UpdatePositionActionType
-  | UpdateDirectionActionType;
+  | UpdateDirectionActionType
+  | ToggleCodeModalActionType;
 
 /**
  * Action Creators
@@ -62,5 +72,11 @@ export const updateDirectionAction = (
   payload: UpdatePositionPayloadType
 ): UpdateDirectionActionType => ({
   type: "search/updateDirection",
+  payload,
+});
+export const toggleCodeModalAction = (
+  payload: ToggleCodeModalPayloadType
+): ToggleCodeModalActionType => ({
+  type: "search/toggleCodeModal",
   payload,
 });

@@ -17,6 +17,7 @@ export interface MapState {
   status: MapSearchStatus;
   position: Position;
   direction: Position;
+  codeModalEnabled: boolean;
 }
 
 export type MapReducer = Reducer<MapState, MapActionTypes>;

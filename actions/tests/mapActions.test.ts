@@ -1,4 +1,5 @@
 import {
+  toggleCodeModalAction,
   updateDirectionAction,
   updateMapSearchStatusAction,
   updatePositionAction,
@@ -30,6 +31,16 @@ describe("updateDirectionAction", () => {
     expect(updateDirectionAction({ latitude: 2, longitude: 1 })).toEqual({
       type: "search/updateDirection",
       payload: { latitude: 2, longitude: 1 },
+    });
+  });
+});
+
+describe("toggleCodeModalAction", () => {
+  it("should return action", () => {
+    expect.assertions(1);
+    expect(toggleCodeModalAction({ codeModalEnabled: true })).toEqual({
+      type: "search/toggleCodeModal",
+      payload: { codeModalEnabled: true },
     });
   });
 });

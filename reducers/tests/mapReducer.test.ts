@@ -6,6 +6,7 @@ const getFakeMapState = (): MapState => ({
   status: { status: "stop" },
   position: { latitude: -200, longitude: -200 },
   direction: { latitude: -200, longitude: -200 },
+  codeModalEnabled: false,
 });
 
 it("should return default state", () => {
@@ -41,4 +42,18 @@ it("should update direction", () => {
   const payload = { latitude: 0, longitude: 0 };
   const action: MapActionTypes = { type: "search/updateDirection", payload };
   expect(mapReducer(state, action)).toEqual({ ...state, direction: payload });
+});
+
+it("should enable code modal", () => {
+  expect.assertions(1);
+  const state = getFakeMapState();
+  const codeModalEnabled = true;
+  const action: MapActionTypes = {
+    type: "search/toggleCodeModal",
+    payload: { codeModalEnabled },
+  };
+  expect(mapReducer(state, action)).toEqual({
+    ...state,
+    codeModalEnabled,
+  });
 });
