@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { MapSearchStatus } from "../utils/types";
 import { useAppDispatch } from "./reduxHooks";
 
@@ -19,10 +20,10 @@ export const useSearchStatus = () => {
 export const useGetCurrentPosition = () => {
   const dispatch = useAppDispatch();
 
-  /**
-   * get current position from navigator.geolocation
-   */
-  const getCurrentPosition = () => {
+  useEffect(() => {
+    /**
+     * get current position from navigator.geolocation
+     */
     // update status
     dispatch({
       type: "search/updateSearchStatus",
@@ -53,6 +54,5 @@ export const useGetCurrentPosition = () => {
         });
       }
     );
-  };
-  return getCurrentPosition;
+  }, []);
 };

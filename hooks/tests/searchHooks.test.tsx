@@ -1,11 +1,9 @@
-import React from "react";
 import { configureStore, EnhancedStore } from "@reduxjs/toolkit";
-import { render } from "@testing-library/react";
-import { Provider } from "react-redux";
 
 import { rootReducer } from "../../reducers/rootReducer";
-import { MapSearchStatus, RootState } from "../../utils/types";
+import { RootState } from "../../utils/types";
 import { useGetCurrentPosition, useSearchStatus } from "../searchHooks";
+import { renderHook } from "@testing-library/react-hooks";
 
 let store: EnhancedStore<RootState>;
 const tmp = console.error;
@@ -34,22 +32,9 @@ afterEach(() => {
 });
 
 describe("useSearchStatus", () => {
-  /**
-   * test component
-   */
-  const Component = ({ status }: { status: MapSearchStatus }) => {
-    const update = useSearchStatus();
-    update(status);
-    return <>test component</>;
-  };
-
   it("should update search status", () => {
     expect.assertions(1);
-    render(
-      <Provider store={store}>
-        <Component status={{ status: "searching" }} />)
-      </Provider>
-    );
+    useSearchStatus()({ status: "searching" });
     expect(mockDispatch).toHaveBeenCalledWith({
       type: "search/updateSearchStatus",
       payload: { status: "searching" },
@@ -58,25 +43,15 @@ describe("useSearchStatus", () => {
 });
 
 describe("useGetCurrentPosition", () => {
-  const Component = () => {
-    const getCurrentPosition = useGetCurrentPosition();
-    getCurrentPosition();
-    return <div>test component</div>;
-  };
-
   it("should update search status 2 times and udpate position", () => {
     expect.assertions(4);
     // set mock value
     mockGetCurrentPosition.mockImplementation((callback, error) => {
-      const coords = { latitude: 123, longitude: 111 };
       return callback({ coords: { latitude: 123, longitude: 111 } });
     });
-    // render component
-    const { container } = render(
-      <Provider store={store}>
-        <Component />
-      </Provider>
-    );
+    // perform hook
+    renderHook(() => useGetCurrentPosition());
+    // validation
     expect(mockDispatch).toHaveBeenCalledTimes(3);
     expect(mockDispatch).toHaveBeenCalledWith({
       type: "search/updatePosition",
@@ -98,12 +73,8 @@ describe("useGetCurrentPosition", () => {
     mockGetCurrentPosition.mockImplementation((callback, error) => {
       error(new Error("unknown error!"));
     });
-    // render component
-    render(
-      <Provider store={store}>
-        <Component />
-      </Provider>
-    );
+    // perform hook
+    renderHook(() => useGetCurrentPosition());
     expect(mockDispatch).toHaveBeenCalledTimes(2);
   });
 });
