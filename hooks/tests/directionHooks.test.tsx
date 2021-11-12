@@ -2,7 +2,7 @@ import { renderHook } from "@testing-library/react-hooks";
 
 import { useUpdateDirection } from "../directionHooks";
 
-// mock api.getDirection
+// mock api.getDestination
 const mockGetDestination = jest.fn();
 jest.mock("../../utils/api", () => ({
   api: {
