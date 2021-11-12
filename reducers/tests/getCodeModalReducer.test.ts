@@ -6,11 +6,14 @@ let state: GetCodeModalState = {
   modalEnabled: false,
   submitButtonEnabled: true,
   submitState: "stop",
+  positionId: null,
 };
+
+let payload: GetCodeModalActionTypes;
 
 it("should update modalEnabled", () => {
   expect.assertions(1);
-  const payload: GetCodeModalActionTypes = {
+  payload = {
     type: "getcode/toggleCodeModal",
     payload: { codeModalEnabled: true },
   };
@@ -19,7 +22,7 @@ it("should update modalEnabled", () => {
 
 it("should update submitButtonEnabled", () => {
   expect.assertions(1);
-  const payload: GetCodeModalActionTypes = {
+  payload = {
     type: "getcode/updateSubmitButton",
     payload: { enabled: false },
   };
@@ -31,7 +34,7 @@ it("should update submitButtonEnabled", () => {
 
 it("should update submitState", () => {
   expect.assertions(1);
-  const payload: GetCodeModalActionTypes = {
+  payload = {
     type: "getcode/updateSubmitState",
     payload: { state: "submitting" },
   };
@@ -41,8 +44,14 @@ it("should update submitState", () => {
   });
 });
 
+it("should update position ID", () => {
+  expect.assertions(1);
+  payload = { type: "getcode/updatePositionId", payload: { id: "xxx" } };
+  expect(reducer(state, payload)).toEqual({ ...state, positionId: "xxx" });
+});
+
 it("should update nothing by default", () => {
   expect.assertions(1);
-  const payload: GetCodeModalActionTypes = { type: "default" };
+  payload = { type: "default" };
   expect(reducer(state, payload)).toBe(state);
 });

@@ -1,5 +1,6 @@
 import { Button, Modal, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import { useGetCodeModalHook } from "../../../../hooks/getCodeModalHooks";
 import { useAppSelector } from "../../../../hooks/reduxHooks";
 
 const style = {
@@ -14,11 +15,11 @@ const style = {
 };
 
 export default function CodeModal() {
-  const { codeModalEnabled } = useAppSelector((state) => state.map);
+  const [modalEnabled] = useGetCodeModalHook();
 
   return (
     <Modal
-      open={codeModalEnabled}
+      open={modalEnabled}
       // onClose={handleClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"

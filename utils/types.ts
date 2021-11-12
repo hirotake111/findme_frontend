@@ -28,6 +28,7 @@ export interface GetCodeModalState {
   modalEnabled: boolean;
   submitButtonEnabled: boolean;
   submitState: GetCodeModalSubmitState;
+  positionId: string | null;
 }
 
 /**

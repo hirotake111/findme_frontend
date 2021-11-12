@@ -8,6 +8,7 @@ import { GetCodeModalSubmitState } from "../utils/types";
 type ToggleCodeModalType = "getcode/toggleCodeModal";
 type UpdateSubmitButtonType = "getcode/updateSubmitButton";
 type UpdateSubmitStateType = "getcode/updateSubmitState";
+type UpdatePositionIdType = "getcode/updatePositionId";
 
 /**
  * payload Types
@@ -20,6 +21,9 @@ interface UpdateSubmitButtonPayloadType {
 }
 interface UpdateSubmitStatePayloadType {
   state: GetCodeModalSubmitState;
+}
+interface UpdatePositionIdPayloadType {
+  id: string;
 }
 
 /**
@@ -40,8 +44,15 @@ interface UpdateSubmitStateActionType
   type: UpdateSubmitStateType;
   payload: UpdateSubmitStatePayloadType;
 }
+interface UpdatePositionIdActionType
+  extends PayloadAction<UpdatePositionIdPayloadType, UpdatePositionIdType> {
+  type: UpdatePositionIdType;
+  payload: UpdatePositionIdPayloadType;
+}
+
 export type GetCodeModalActionTypes =
   | { type: "default" }
   | ToggleCodeModalActionType
   | UpdateSubmitButtonActionType
-  | UpdateSubmitStateActionType;
+  | UpdateSubmitStateActionType
+  | UpdatePositionIdActionType;

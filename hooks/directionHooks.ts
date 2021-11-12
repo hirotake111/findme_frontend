@@ -25,7 +25,7 @@ export const useUpdateDirection = async (positionId: string) => {
         }
         // code required -> show modal to input code
         dispatch({
-          type: "search/toggleCodeModal",
+          type: "getcode/toggleCodeModal",
           payload: { codeModalEnabled: true },
         });
       } catch (e) {

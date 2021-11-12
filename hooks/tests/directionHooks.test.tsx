@@ -44,7 +44,7 @@ describe("useUpdateDirection hook", () => {
     await renderHook(() => useUpdateDirection("xxx"));
 
     expect(mockDispatch).toHaveBeenCalledWith({
-      type: "search/toggleCodeModal",
+      type: "getcode/toggleCodeModal",
       payload: { codeModalEnabled: true },
     });
   });
