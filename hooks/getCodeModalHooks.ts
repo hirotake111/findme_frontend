@@ -7,9 +7,8 @@ import { useAppDispatch, useAppSelector } from "./reduxHooks";
  */
 export const useGetCodeModal = () => {
   const dispatch = useAppDispatch();
-  const { modalEnabled, positionId, submitButtonEnabled } = useAppSelector(
-    (state) => state.getCodeModal
-  );
+  const { modalEnabled, positionId, submitButtonEnabled, errorMessage } =
+    useAppSelector((state) => state.getCodeModal);
   const textRef = useRef<HTMLInputElement>(null);
 
   /**
@@ -83,7 +82,7 @@ export const useGetCodeModal = () => {
   };
 
   return [
-    { modalEnabled, submitButtonEnabled, textRef },
+    { modalEnabled, submitButtonEnabled, errorMessage, textRef },
     getDestinationByCode,
   ] as const;
 };
