@@ -1,5 +1,5 @@
 import Home from ".";
-import CodeModal from "../components/common/modal/CodeModal/CodeModal";
+import CodeModal from "../components/modal/CodeModal/CodeModal";
 import Initializer from "../components/direction/Initializer/Initializer";
 import { usePositionId } from "../hooks/directionHooks";
 

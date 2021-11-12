@@ -5,7 +5,8 @@ import { api } from "../../utils/api";
 const mockGetDestinationByCode = jest.fn();
 jest.mock("../../utils/api", () => ({
   api: {
-    getDestinationByCode: () => mockGetDestinationByCode(),
+    getDestinationByCode: (id: string, code: string) =>
+      mockGetDestinationByCode(id, code),
   },
 }));
 
@@ -14,7 +15,7 @@ const mockDispatch = jest.fn();
 const mockSelector = jest.fn();
 jest.mock("react-redux", () => ({
   useDispatch: () => mockDispatch,
-  useSelector: () => mockSelector(),
+  useSelector: (func: (state: any) => any) => mockSelector(func),
 }));
 
 beforeEach(() => {
@@ -26,7 +27,7 @@ beforeEach(() => {
 
 describe("useGetCodeModal", () => {
   it("should update destination in redux store", async () => {
-    expect.assertions(3);
+    expect.assertions(5);
     mockGetDestinationByCode.mockReturnValue({
       result: "success",
       position: { latitude: 1.111, longitude: 2.222 },
@@ -40,6 +41,8 @@ describe("useGetCodeModal", () => {
       type: "search/updateDirection",
       payload: { latitude: 1.111, longitude: 2.222 },
     });
+    expect(mockGetDestinationByCode).toHaveBeenCalledWith("xxxxxx", "mycode");
+    expect(typeof mockSelector.mock.calls[0][0]).toBe("function");
   });
 
   it("should update error message if api failed", async () => {

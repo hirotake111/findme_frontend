@@ -3,7 +3,7 @@ import CodeModal from "./CodeModal";
 
 // mock useGetCodeModalHook
 const mockUseGetCodeModal = jest.fn();
-jest.mock("../../../../hooks/getCodeModalHooks", () => ({
+jest.mock("../../../hooks/getCodeModalHooks", () => ({
   useGetCodeModal: () => mockUseGetCodeModal(),
 }));
 

@@ -1,6 +1,6 @@
 import { Button, Modal, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { useGetCodeModal } from "../../../../hooks/getCodeModalHooks";
+import { useGetCodeModal } from "../../../hooks/getCodeModalHooks";
 
 const style = {
   position: "absolute" as "absolute",

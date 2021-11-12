@@ -18,7 +18,7 @@ jest.mock("../hooks/directionHooks", () => ({
 // mock Initializer
 jest.mock("../components/direction/Initializer/Initializer");
 // mock CodeModal
-jest.mock("../components/common/modal/CodeModal/CodeModal");
+jest.mock("../components/modal/CodeModal/CodeModal");
 // mock Home page
 jest.mock("../pages");
 (Home as jest.Mock).mockReturnValue(<p>Home</p>);
