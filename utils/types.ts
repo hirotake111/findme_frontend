@@ -1,4 +1,5 @@
 import { Reducer } from "redux";
+import { GetCodeModalActionTypes } from "../actions/getCodeModalActions";
 
 import { MapActionTypes } from "../actions/mapActions";
 import { store } from "./store";
@@ -21,7 +22,22 @@ export interface MapState {
   errorMessage: string | null;
 }
 
+export type GetCodeModalSubmitState = "stop" | "submitting";
+
+export interface GetCodeModalState {
+  modalEnabled: boolean;
+  submitButtonEnabled: boolean;
+  submitState: GetCodeModalSubmitState;
+}
+
+/**
+ * reducer types
+ */
 export type MapReducer = Reducer<MapState, MapActionTypes>;
+export type GetCodeModalReducer = Reducer<
+  GetCodeModalState,
+  GetCodeModalActionTypes
+>;
 
 /**
  * state and dispatch type
