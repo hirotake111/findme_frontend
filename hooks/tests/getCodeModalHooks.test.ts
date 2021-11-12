@@ -1,5 +1,5 @@
+// import { useRef } from "react";
 import { useGetCodeModal } from "../getCodeModalHooks";
-import { api } from "../../utils/api";
 
 // mock api
 const mockGetDestinationByCode = jest.fn();
@@ -10,6 +10,11 @@ jest.mock("../../utils/api", () => ({
   },
 }));
 
+// mock useRef
+const mockUseRef = jest.fn();
+jest.mock("react", () => ({
+  useRef: (params: any) => mockUseRef(params),
+}));
 // mock useDispatch and useSelector
 const mockDispatch = jest.fn();
 const mockSelector = jest.fn();
@@ -23,19 +28,26 @@ beforeEach(() => {
   mockGetDestinationByCode.mockReset();
   mockDispatch.mockClear();
   mockSelector.mockClear();
+  mockUseRef.mockClear();
 });
 
 describe("useGetCodeModal", () => {
   it("should update destination in redux store", async () => {
-    expect.assertions(5);
+    expect.assertions(6);
     mockGetDestinationByCode.mockReturnValue({
       result: "success",
       position: { latitude: 1.111, longitude: 2.222 },
     });
-    mockSelector.mockReturnValue({ modalEnabled: false, positionId: "xxxxxx" });
-    const [enabled, get] = useGetCodeModal();
-    expect(enabled).toBe(false);
-    await get("mycode");
+    mockSelector.mockReturnValue({
+      modalEnabled: false,
+      submitButtonEnabled: false,
+      positionId: "xxxxxx",
+    });
+    mockUseRef.mockReturnValue({ current: { value: "mycode" } });
+    const [props, get] = useGetCodeModal();
+    expect(props.modalEnabled).toBe(false);
+    expect(props.submitButtonEnabled).toBe(false);
+    await get();
     expect(mockDispatch).toHaveBeenCalledTimes(7);
     expect(mockDispatch).toHaveBeenCalledWith({
       type: "search/updateDirection",
@@ -54,9 +66,10 @@ describe("useGetCodeModal", () => {
       throw err;
     });
     mockSelector.mockReturnValue({ modalEnabled: false, positionId: "xxxxxx" });
+    mockUseRef.mockReturnValue({ current: { value: "mycode" } });
     const [enabled, get] = useGetCodeModal();
     try {
-      await get("mycode");
+      await get();
       expect(mockDispatch).toHaveBeenCalledTimes(5);
       expect(mockDispatch).toHaveBeenCalledWith({
         type: "getcode/updateModalErrorMessage",

@@ -7,14 +7,17 @@ import { useAppDispatch, useAppSelector } from "./reduxHooks";
  */
 export const useGetCodeModal = () => {
   const dispatch = useAppDispatch();
-  const { modalEnabled, positionId } = useAppSelector(
+  const { modalEnabled, positionId, submitButtonEnabled } = useAppSelector(
     (state) => state.getCodeModal
   );
+  const textRef = useRef<HTMLInputElement>(null);
 
   /**
    * get destination data using code
    */
-  const getDestinationByCode = async (code: string): Promise<void> => {
+  const getDestinationByCode = async (): Promise<void> => {
+    const code = textRef.current?.value;
+
     // disable submit button
     dispatch({
       type: "getcode/updateSubmitButton",
@@ -26,6 +29,8 @@ export const useGetCodeModal = () => {
       payload: { state: "submitting" },
     });
     try {
+      // validate code
+      if (!code) throw new Error(`code is null...`);
       // invoke network call
       const {
         position: { latitude, longitude },
@@ -77,5 +82,8 @@ export const useGetCodeModal = () => {
     }
   };
 
-  return [modalEnabled, getDestinationByCode] as const;
+  return [
+    { modalEnabled, submitButtonEnabled, textRef },
+    getDestinationByCode,
+  ] as const;
 };

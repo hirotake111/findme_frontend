@@ -14,7 +14,12 @@ const style = {
 };
 
 export default function CodeModal() {
-  const [modalEnabled] = useGetCodeModal();
+  const [{ modalEnabled, submitButtonEnabled, textRef }, getDestinationByCode] =
+    useGetCodeModal();
+
+  const handleClick = () => {
+    getDestinationByCode();
+  };
 
   return (
     <Modal
@@ -32,9 +37,16 @@ export default function CodeModal() {
           id="outlined-basic"
           label="Enter code here"
           variant="outlined"
+          inputRef={textRef}
         />
         <p>
-          <Button variant="outlined">Verify</Button>
+          <Button
+            variant="outlined"
+            disabled={!submitButtonEnabled}
+            onClick={handleClick}
+          >
+            Verify
+          </Button>
         </p>
       </Box>
     </Modal>
