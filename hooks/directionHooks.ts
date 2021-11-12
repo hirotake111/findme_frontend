@@ -1,3 +1,4 @@
+import { useRouter } from "next/dist/client/router";
 import { useEffect } from "react";
 import { updateErrorMessageAction } from "../actions/mapActions";
 import { api } from "../utils/api";
@@ -14,6 +15,11 @@ export const useUpdateDirection = async (positionId: string) => {
    */
   useEffect(() => {
     (async () => {
+      // store position ID
+      dispatch({
+        type: "getcode/updatePositionId",
+        payload: { id: positionId },
+      });
       try {
         const data = await api.getDestination(positionId);
         if (data.result === "success") {
@@ -33,4 +39,18 @@ export const useUpdateDirection = async (positionId: string) => {
       }
     })();
   }, []);
+};
+
+/**
+ * custom hook that gets position ID from query string and store it
+ */
+export const usePositionId = (): string | null => {
+  const dispatch = useAppDispatch();
+  const { positionId } = useRouter().query;
+
+  if (typeof positionId !== "string") return null;
+
+  // dispatch position Id
+  dispatch({ type: "getcode/updatePositionId", payload: { id: positionId } });
+  return positionId;
 };

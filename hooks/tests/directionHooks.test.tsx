@@ -1,7 +1,7 @@
 import { renderHook } from "@testing-library/react-hooks";
 import { updateErrorMessageAction } from "../../actions/mapActions";
 
-import { useUpdateDirection } from "../directionHooks";
+import { usePositionId, useUpdateDirection } from "../directionHooks";
 
 // mock api.getDestination
 const mockGetDestination = jest.fn();
@@ -18,9 +18,21 @@ jest.mock("react-redux", () => ({
   useSelector: () => jest.fn(),
 }));
 
+// mock useRouter
+const mockUseRouter = jest.fn();
+jest.mock("next/dist/client/router", () => ({
+  useRouter: () => mockUseRouter(),
+}));
+
+beforeEach(() => {
+  mockDispatch.mockClear();
+  mockGetDestination.mockClear();
+  mockUseRouter.mockClear();
+});
+
 describe("useUpdateDirection hook", () => {
   it("should update direction in redux store", async () => {
-    expect.assertions(1);
+    expect.assertions(2);
     const position = { latitude: 20.0, longitude: 30.0 };
     mockGetDestination.mockReturnValue(
       Promise.resolve({
@@ -33,6 +45,11 @@ describe("useUpdateDirection hook", () => {
     expect(mockDispatch).toHaveBeenCalledWith({
       type: "search/updateDirection",
       payload: position,
+    });
+    // also it should update position id
+    expect(mockDispatch).toHaveBeenCalledWith({
+      type: "getcode/updatePositionId",
+      payload: { id: "xxx" },
     });
   });
 
@@ -60,5 +77,20 @@ describe("useUpdateDirection hook", () => {
       payload: { message: "Error: network error!" },
       type: "search/updateErrorMessage",
     });
+  });
+});
+
+describe("usePositionId", () => {
+  it("should update positionId and return it", () => {
+    expect.assertions(2);
+    mockUseRouter.mockReturnValue({ query: { positionId: "x-x-x" } });
+    expect(usePositionId()).toBe("x-x-x");
+    expect(mockUseRouter).toHaveBeenCalledTimes(1);
+  });
+
+  it("should return null if received positionId is not string", () => {
+    expect.assertions(1);
+    mockUseRouter.mockReturnValue({ query: { positionId: ["x-x-x"] } });
+    expect(usePositionId()).toBe(null);
   });
 });
