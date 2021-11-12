@@ -15,10 +15,10 @@ const style = {
 };
 
 export default function LinkModal() {
-  const [link, ref, func] = useLinkModal();
+  const [link, ref, create] = useLinkModal();
 
   const handleClick = () => {
-    console.log("clicked!");
+    create();
   };
 
   return (
@@ -32,22 +32,30 @@ export default function LinkModal() {
         <Typography id="modal-modal-title" variant="h6" component="h2">
           Share Link
         </Typography>
+        <p>
+          You can protect link by entering code here.
+          <span style={{ fontSize: "0.7rem" }}>
+            (More than 3 characters / alphabets and numbers only.)
+          </span>
+        </p>
         <TextField
           id="outlined-basic"
           label="Enter code here"
           variant="outlined"
-          // inputRef={textRef}
+          inputRef={ref}
         />
         <p>
           <Button
             variant="outlined"
-            disabled={link.submitStatus === "stop"}
+            disabled={link.submitStatus !== "stop"}
             onClick={handleClick}
           >
-            Verify
+            Share
           </Button>
         </p>
-        <Typography style={{ color: "#fa86a7" }}>{""}</Typography>
+        <Typography style={{ color: "#fa86a7" }}>
+          {link.errorMessage}
+        </Typography>
       </Box>
     </Modal>
   );

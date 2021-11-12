@@ -40,7 +40,7 @@ export interface GetCodeModalState {
 /**
  * shareCodeModal
  */
-export type ShareLinkSubmitStatus = "stop" | "submitting";
+export type ShareLinkSubmitStatus = "stop" | "submitting" | "done";
 export interface ShareLinkState {
   modalEnabled: boolean;
   errorMessage: string;

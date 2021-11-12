@@ -1,7 +1,7 @@
 import { ShareLinkReducer, ShareLinkState } from "../utils/types";
 
 const init: ShareLinkState = {
-  modalEnabled: false,
+  modalEnabled: true,
   errorMessage: "",
   link: "",
   submitStatus: "stop",
