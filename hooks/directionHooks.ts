@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { updateErrorMessageAction } from "../actions/mapActions";
 import { api } from "../utils/api";
 import { useAppDispatch } from "./reduxHooks";
 
@@ -28,10 +29,7 @@ export const useUpdateDirection = async (positionId: string) => {
           payload: { codeModalEnabled: true },
         });
       } catch (e) {
-        dispatch({
-          type: "search/updateSearchStatus",
-          payload: { status: "error", detail: `${e}` },
-        });
+        dispatch(updateErrorMessageAction({ message: `${e}` }));
       }
     })();
   }, []);

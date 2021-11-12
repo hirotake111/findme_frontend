@@ -70,11 +70,11 @@ describe("useGetCurrentPosition", () => {
   it("should update search status 2 times if it failed to get position", () => {
     expect.assertions(1);
     // set mock value
-    mockGetCurrentPosition.mockImplementation((callback, error) => {
-      error(new Error("unknown error!"));
+    mockGetCurrentPosition.mockImplementation((callback, errorCallback) => {
+      errorCallback(new Error("unknown error!"));
     });
     // perform hook
     renderHook(() => useGetCurrentPosition());
-    expect(mockDispatch).toHaveBeenCalledTimes(2);
+    expect(mockDispatch).toHaveBeenCalledTimes(3);
   });
 });

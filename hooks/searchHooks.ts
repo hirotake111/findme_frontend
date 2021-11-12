@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { updateErrorMessageAction } from "../actions/mapActions";
 import { MapSearchStatus } from "../utils/types";
 import { useAppDispatch } from "./reduxHooks";
 
@@ -50,8 +51,9 @@ export const useGetCurrentPosition = () => {
         // update status
         dispatch({
           type: "search/updateSearchStatus",
-          payload: { status: "error", detail: err.message },
+          payload: { status: "stop" },
         });
+        dispatch(updateErrorMessageAction({ message: err.message }));
       }
     );
   }, []);

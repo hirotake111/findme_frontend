@@ -1,4 +1,5 @@
 import { renderHook } from "@testing-library/react-hooks";
+import { updateErrorMessageAction } from "../../actions/mapActions";
 
 import { useUpdateDirection } from "../directionHooks";
 
@@ -56,8 +57,8 @@ describe("useUpdateDirection hook", () => {
     });
     await renderHook(() => useUpdateDirection("xxx"));
     expect(mockDispatch).toHaveBeenCalledWith({
-      type: "search/updateSearchStatus",
-      payload: { status: "error", detail: `${err}` },
+      payload: { message: "Error: network error!" },
+      type: "search/updateErrorMessage",
     });
   });
 });
