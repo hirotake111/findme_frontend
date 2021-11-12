@@ -34,7 +34,7 @@ it("should not render modal if codeModalEnabled is false", () => {
     {
       modalEnabled: false,
       submitButtonEnabled: false,
-      textReg: { current: { value: "" } },
+      textRef: { current: { value: "" } },
     },
     () => {},
   ]);
@@ -48,11 +48,26 @@ it("should not render modal if codeModalEnabled is false", () => {
     {
       modalEnabled: true,
       submitButtonEnabled: true,
-      textReg: { current: { value: "" } },
+      textRef: { current: { value: "" } },
     },
     mockCallback,
   ]);
   const { getByText } = render(<CodeModal />);
   fireEvent.click(getByText("Verify"));
   expect(mockCallback).toHaveBeenCalledTimes(1);
+});
+
+it("should display error message if errorMessage.length > 0", () => {
+  expect.assertions(1);
+  mockUseGetCodeModal.mockReturnValue([
+    {
+      modalEnabled: true,
+      submitButtonEnabled: true,
+      textRef: { current: { value: "" } },
+      errorMessage: "hey",
+    },
+    mockCallback,
+  ]);
+  const { getByText } = render(<CodeModal />);
+  expect(getByText("hey")).toBeTruthy();
 });

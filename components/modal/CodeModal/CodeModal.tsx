@@ -14,8 +14,10 @@ const style = {
 };
 
 export default function CodeModal() {
-  const [{ modalEnabled, submitButtonEnabled, textRef }, getDestinationByCode] =
-    useGetCodeModal();
+  const [
+    { modalEnabled, submitButtonEnabled, errorMessage, textRef },
+    getDestinationByCode,
+  ] = useGetCodeModal();
 
   const handleClick = () => {
     getDestinationByCode();
@@ -48,6 +50,7 @@ export default function CodeModal() {
             Verify
           </Button>
         </p>
+        <Typography style={{ color: "#fa86a7" }}>{errorMessage}</Typography>
       </Box>
     </Modal>
   );
