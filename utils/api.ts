@@ -9,6 +9,11 @@ interface Success {
 interface CodeRequired {
   result: "code required";
 }
+interface CreateSuccess {
+  result: "success";
+  id: string;
+  position: Position;
+}
 type Result = Success | CodeRequired;
 
 /**
@@ -70,7 +75,44 @@ const getDestinationByCode = async (
   }
 };
 
+/**
+ * post position and code to API server, then return position ID
+ */
+const createLink = async ({
+  latitude,
+  longitude,
+  code,
+}: Position): Promise<CreateSuccess> => {
+  try {
+    const requestUrl = `${config.ApiServerUrl}/api/`;
+    const payload = { latitude, longitude, code };
+    const init: RequestInit = {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    };
+    // post data to API server
+    const body = await fetch(requestUrl, init).then((res) => res.json());
+    const { result, detail } = body;
+    // validate result
+    if (result !== "success") throw new Error(`network error - ${detail}`);
+    // validate position
+    const position = validatePosition(detail?.position);
+    // validate id
+    const id = detail?.id;
+    if (!(id && typeof id === "string"))
+      throw new Error(`validation error - invalid id: ${id}`);
+
+    return { result: "success", id, position };
+  } catch (e) {
+    throw e;
+  }
+};
+
 export const api = {
   getDestination,
   getDestinationByCode,
+  createLink,
 };

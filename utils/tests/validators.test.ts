@@ -9,6 +9,12 @@ describe("validatePosition", () => {
     expect(validatePosition(position)).toEqual(position);
   });
 
+  it("should return position with code successfully", () => {
+    expect.assertions(1);
+    const positionWithCode = { ...position, code: "xxx" };
+    expect(validatePosition(positionWithCode)).toEqual(positionWithCode);
+  });
+
   it("should throw an error if passed object is falsy value", () => {
     expect.assertions(1);
     try {
@@ -36,6 +42,16 @@ describe("validatePosition", () => {
     } catch (e) {
       if (e instanceof Error)
         expect(e.message).toBe("validation error - invalid longitude: abcd");
+    }
+  });
+
+  it("should throw an error if code is invalid", () => {
+    expect.assertions(1);
+    try {
+      validatePosition({ ...position, code: true });
+    } catch (e) {
+      if (e instanceof Error)
+        expect(e.message).toBe("validation error - invalid code: true");
     }
   });
 });

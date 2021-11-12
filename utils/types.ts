@@ -12,7 +12,11 @@ export type MapSearchStatus =
   | { status: "stop" }
   | { status: "searching" }
   | { status: "error"; detail: string };
-export type Position = { latitude: number; longitude: number };
+export type Position = {
+  latitude: number;
+  longitude: number;
+  code?: string | number;
+};
 export interface MapState {
   status: MapSearchStatus;
   position: Position;

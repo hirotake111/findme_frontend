@@ -1,4 +1,5 @@
 import { api } from "../api";
+import { Position } from "../types";
 
 // mock fetch
 const mockJson = jest.fn();
@@ -97,6 +98,96 @@ describe("getDestinationByCode", () => {
       await api.getDestinationByCode("xxx", "abcd");
     } catch (e) {
       if (e instanceof Error) expect(e.message).toBe("database error");
+    }
+  });
+});
+
+describe("createLink", () => {
+  it("should return 'success', id and position data without code", async () => {
+    expect.assertions(1);
+    const id = "xxx";
+    const position: Position = { latitude: 1.111, longitude: 2.22 };
+    const detail = { id, position };
+    mockJson.mockReturnValue(Promise.resolve({ result: "success", detail }));
+    expect(await api.createLink(position)).toEqual({
+      result: "success",
+      id,
+      position,
+    });
+  });
+
+  it("should return 'success', id and position data with code", async () => {
+    expect.assertions(1);
+    const id = "xxx";
+    const position: Position = { latitude: 1.111, longitude: 2.22, code: 1234 };
+    const detail = { id, position };
+    mockJson.mockReturnValue(Promise.resolve({ result: "success", detail }));
+    expect(await api.createLink(position)).toEqual({
+      result: "success",
+      id,
+      position,
+    });
+  });
+
+  it("should throw an error if response is not 'success'", async () => {
+    expect.assertions(1);
+    const position: Position = { latitude: 1.111, longitude: 2.22, code: 1234 };
+    mockJson.mockReturnValue(
+      Promise.resolve({ result: "error", detail: "bad request" })
+    );
+    try {
+      await api.createLink(position);
+    } catch (e) {
+      if (e instanceof Error)
+        expect(e.message).toEqual("network error - bad request");
+    }
+  });
+
+  it("should throw an error if returned position data is invalid", async () => {
+    expect.assertions(1);
+    const position: Position = { latitude: 1.111, longitude: 2.22, code: 1234 };
+    mockJson.mockReturnValue(
+      Promise.resolve({
+        result: "success",
+        detail: { id: "xxx", position: { latitude: "abcd", longitude: 1 } },
+      })
+    );
+    try {
+      await api.createLink(position);
+    } catch (e) {
+      if (e instanceof Error)
+        expect(e.message).toEqual("validation error - invalid latitude: abcd");
+    }
+  });
+
+  it("should throw an error if returned id is invalid", async () => {
+    expect.assertions(1);
+    const position: Position = { latitude: 1.111, longitude: 2.22, code: 1234 };
+    mockJson.mockReturnValue(
+      Promise.resolve({
+        result: "success",
+        detail: { id: null, position },
+      })
+    );
+    try {
+      await api.createLink(position);
+    } catch (e) {
+      if (e instanceof Error)
+        expect(e.message).toEqual("validation error - invalid id: null");
+    }
+  });
+
+  it("should throw an error if network call failed", async () => {
+    expect.assertions(1);
+    const err = new Error("network error....");
+    const position: Position = { latitude: 1.111, longitude: 2.22, code: 1234 };
+    mockJson.mockImplementation(() => {
+      throw err;
+    });
+    try {
+      await api.createLink(position);
+    } catch (e) {
+      expect(e).toBe(err);
     }
   });
 });
