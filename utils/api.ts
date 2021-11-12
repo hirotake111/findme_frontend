@@ -41,6 +41,36 @@ const getDestination = async (positionId: string): Promise<Result> => {
   }
 };
 
+/**
+ * get destination data from API server using code
+ */
+const getDestinationByCode = async (
+  positionId: string,
+  code: string
+): Promise<Success> => {
+  try {
+    const requestUrl = `${config.ApiServerUrl}/api/${positionId}`;
+    const init: RequestInit = {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ code }),
+    };
+    // get position data from API server
+    const body = await fetch(requestUrl, init).then((res) => res.json());
+    if (body.result === "success")
+      return {
+        result: "success",
+        position: validatePosition(body.detail),
+      };
+    throw new Error(body.detail);
+  } catch (e) {
+    throw e;
+  }
+};
+
 export const api = {
   getDestination,
+  getDestinationByCode,
 };
