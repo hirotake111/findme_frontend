@@ -11,7 +11,7 @@ const init: MapState = {
     longitude: -200,
   },
   codeModalEnabled: false,
-  errorMessage: null,
+  errorMessage: "",
 };
 
 export const mapReducer: MapReducer = (state = init, action) => {

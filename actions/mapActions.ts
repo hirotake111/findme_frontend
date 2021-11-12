@@ -20,7 +20,7 @@ interface ToggleCodeModalPayloadType {
   codeModalEnabled: boolean;
 }
 interface UpdateErrorMessagePayloadType {
-  message: string | null;
+  message: string;
 }
 
 /**
