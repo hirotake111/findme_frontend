@@ -1,3 +1,3 @@
-export default function SearchMessage() {
+export default function ErrorMessage() {
   return <p>mock SearchMessage component</p>;
 }

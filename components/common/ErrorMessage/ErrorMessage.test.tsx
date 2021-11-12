@@ -4,7 +4,7 @@ import { useAppDispatch } from "../../../hooks/reduxHooks";
 
 import { store } from "../../../utils/store";
 import { MapSearchStatus } from "../../../utils/types";
-import SearchMessage from "./SearchMessage";
+import ErrorMessage from "./ErrorMessage";
 
 const cLog = console.log;
 const cGroup = console.group;
@@ -28,7 +28,7 @@ it("should render searching message if search status is 'stop'", () => {
   expect.assertions(1);
   const { container } = render(
     <Provider store={store}>
-      <SearchMessage />
+      <ErrorMessage />
       <Component value={{ status: "stop" }} />
     </Provider>
   );
@@ -39,7 +39,7 @@ it("should render searching message if search status is 'searching'", () => {
   expect.assertions(1);
   const { getByText } = render(
     <Provider store={store}>
-      <SearchMessage />
+      <ErrorMessage />
       <Component value={{ status: "searching" }} />
     </Provider>
   );
@@ -51,7 +51,7 @@ it("should render error message if search status is 'error'", () => {
   const err = "unable to get geolocation!";
   const { getByText } = render(
     <Provider store={store}>
-      <SearchMessage />
+      <ErrorMessage />
       <Component value={{ status: "error", detail: err }} />
     </Provider>
   );

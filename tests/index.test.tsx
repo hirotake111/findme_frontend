@@ -5,7 +5,7 @@ import NextPage from "../pages/index";
 import { store } from "../utils/store";
 
 // mock components
-jest.mock("../components/common/SearchMessage/SearchMessage");
+jest.mock("../components/common/ErrorMessage/ErrorMessage");
 jest.mock("../components/map/Geolocation/Geolocation");
 jest.mock("../components/map/Container/Container");
 

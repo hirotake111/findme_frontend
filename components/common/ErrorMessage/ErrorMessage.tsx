@@ -1,8 +1,8 @@
 import { useAppSelector } from "../../../hooks/reduxHooks";
 
-import styles from "./SearchMessage.module.css";
+import styles from "./ErrorMessage.module.css";
 
-export default function SearchMessage() {
+export default function ErrorMessage() {
   const { status } = useAppSelector((state) => state.map);
 
   return status.status === "searching" ? (
