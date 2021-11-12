@@ -15,11 +15,6 @@ export const useUpdateDirection = async (positionId: string) => {
    */
   useEffect(() => {
     (async () => {
-      // store position ID
-      dispatch({
-        type: "getcode/updatePositionId",
-        payload: { id: positionId },
-      });
       try {
         const data = await api.getDestination(positionId);
         if (data.result === "success") {

@@ -1,7 +1,6 @@
 import { Button, Modal, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { useGetCodeModalHook } from "../../../../hooks/getCodeModalHooks";
-import { useAppSelector } from "../../../../hooks/reduxHooks";
+import { useGetCodeModal } from "../../../../hooks/getCodeModalHooks";
 
 const style = {
   position: "absolute" as "absolute",
@@ -15,7 +14,7 @@ const style = {
 };
 
 export default function CodeModal() {
-  const [modalEnabled] = useGetCodeModalHook();
+  const [modalEnabled] = useGetCodeModal();
 
   return (
     <Modal

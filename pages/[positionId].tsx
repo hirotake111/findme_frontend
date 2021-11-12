@@ -1,24 +1,20 @@
-import { useRouter } from "next/dist/client/router";
-
 import Home from ".";
 import CodeModal from "../components/common/modal/CodeModal/CodeModal";
 import Initializer from "../components/direction/Initializer/Initializer";
+import { usePositionId } from "../hooks/directionHooks";
 
 export default function Direction() {
-  const router = useRouter();
-  const { positionId } = router.query;
+  const positionId = usePositionId();
 
   return (
     <>
-      {typeof positionId === "string" ? (
+      {positionId ? (
         <>
           <CodeModal />
           <Initializer positionId={positionId} />
           <Home />
         </>
-      ) : (
-        <p>Error - invalid position ID: {positionId}</p>
-      )}
+      ) : null}
     </>
   );
 }

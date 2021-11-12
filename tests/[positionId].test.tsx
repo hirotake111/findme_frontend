@@ -4,10 +4,17 @@ import Direction from "../pages/[positionId]";
 import Home from "../pages";
 
 // mock useRouter
-const mockUseRouter = jest.fn();
-jest.mock("next/dist/client/router", () => ({
-  useRouter: () => mockUseRouter(),
+// const mockUseRouter = jest.fn();
+// jest.mock("next/dist/client/router", () => ({
+//   useRouter: () => mockUseRouter(),
+// }));
+
+// mock usePositionId
+const mockUsePositionId = jest.fn();
+jest.mock("../hooks/directionHooks", () => ({
+  usePositionId: () => mockUsePositionId(),
 }));
+
 // mock Initializer
 jest.mock("../components/direction/Initializer/Initializer");
 // mock CodeModal
@@ -18,18 +25,16 @@ jest.mock("../pages");
 
 it("should display Home page if given ID is valid", () => {
   expect.assertions(1);
-  mockUseRouter.mockReturnValue({ query: { positionId: "xxx" } });
+  mockUsePositionId.mockReturnValue("xxx");
   const { container } = render(<Direction />);
   expect(container.firstChild?.textContent).toEqual(
     "mock code modal component"
   );
 });
 
-it("should display an error message if given ID is invalid", () => {
+it("should display nothing if given ID is invalid", () => {
   expect.assertions(1);
-  mockUseRouter.mockReturnValue({ query: { positionId: 123 } });
+  mockUsePositionId.mockReturnValue(null);
   const { container } = render(<Direction />);
-  expect(container.firstChild?.textContent).toEqual(
-    "Error - invalid position ID: 123"
-  );
+  expect(container.firstChild).toEqual(null);
 });

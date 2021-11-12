@@ -5,7 +5,7 @@ import { useAppSelector } from "./reduxHooks";
 /**
  * custom hook for GetCodeModal
  */
-export const useGetCodeModalHook = () => {
+export const useGetCodeModal = () => {
   const { modalEnabled } = useAppSelector((state) => state.getCodeModal);
 
   /**

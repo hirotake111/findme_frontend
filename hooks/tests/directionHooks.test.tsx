@@ -32,7 +32,7 @@ beforeEach(() => {
 
 describe("useUpdateDirection hook", () => {
   it("should update direction in redux store", async () => {
-    expect.assertions(2);
+    expect.assertions(1);
     const position = { latitude: 20.0, longitude: 30.0 };
     mockGetDestination.mockReturnValue(
       Promise.resolve({
@@ -45,11 +45,6 @@ describe("useUpdateDirection hook", () => {
     expect(mockDispatch).toHaveBeenCalledWith({
       type: "search/updateDirection",
       payload: position,
-    });
-    // also it should update position id
-    expect(mockDispatch).toHaveBeenCalledWith({
-      type: "getcode/updatePositionId",
-      payload: { id: "xxx" },
     });
   });
 
