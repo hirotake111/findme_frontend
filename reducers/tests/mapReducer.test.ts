@@ -7,7 +7,7 @@ const getFakeMapState = (): MapState => ({
   position: { latitude: -200, longitude: -200 },
   direction: { latitude: -200, longitude: -200 },
   codeModalEnabled: false,
-  errorMessage: null,
+  errorMessage: "",
 });
 
 it("should return default state", () => {

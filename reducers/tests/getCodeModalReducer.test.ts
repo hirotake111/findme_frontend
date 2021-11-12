@@ -6,7 +6,8 @@ let state: GetCodeModalState = {
   modalEnabled: false,
   submitButtonEnabled: true,
   submitState: "stop",
-  positionId: null,
+  positionId: "",
+  errorMessage: "",
 };
 
 let payload: GetCodeModalActionTypes;
@@ -48,6 +49,15 @@ it("should update position ID", () => {
   expect.assertions(1);
   payload = { type: "getcode/updatePositionId", payload: { id: "xxx" } };
   expect(reducer(state, payload)).toEqual({ ...state, positionId: "xxx" });
+});
+
+it("should update error message", () => {
+  expect.assertions(1);
+  payload = {
+    type: "getcode/updateModalErrorMessage",
+    payload: { message: "hey" },
+  };
+  expect(reducer(state, payload)).toEqual({ ...state, errorMessage: "hey" });
 });
 
 it("should update nothing by default", () => {

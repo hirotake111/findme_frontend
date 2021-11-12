@@ -42,7 +42,7 @@ const getDestination = async (positionId: string): Promise<Result> => {
 };
 
 /**
- * get destination data from API server using code
+ * get destination data from API server using code, otherwise throw an error
  */
 const getDestinationByCode = async (
   positionId: string,

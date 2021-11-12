@@ -4,7 +4,8 @@ const init: GetCodeModalState = {
   modalEnabled: false,
   submitButtonEnabled: true,
   submitState: "stop",
-  positionId: null,
+  positionId: "",
+  errorMessage: "",
 };
 
 export const getCodeModalReducer: GetCodeModalReducer = (
@@ -23,6 +24,9 @@ export const getCodeModalReducer: GetCodeModalReducer = (
 
     case "getcode/updatePositionId":
       return { ...state, positionId: action.payload.id };
+
+    case "getcode/updateModalErrorMessage":
+      return { ...state, errorMessage: action.payload.message };
 
     default:
       return state;

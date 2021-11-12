@@ -9,6 +9,7 @@ type ToggleCodeModalType = "getcode/toggleCodeModal";
 type UpdateSubmitButtonType = "getcode/updateSubmitButton";
 type UpdateSubmitStateType = "getcode/updateSubmitState";
 type UpdatePositionIdType = "getcode/updatePositionId";
+type UpdateModalErrorMessageType = "getcode/updateModalErrorMessage";
 
 /**
  * payload Types
@@ -24,6 +25,9 @@ interface UpdateSubmitStatePayloadType {
 }
 interface UpdatePositionIdPayloadType {
   id: string;
+}
+interface UpdateModalErrorMessagePayloadType {
+  message: string;
 }
 
 /**
@@ -49,10 +53,19 @@ interface UpdatePositionIdActionType
   type: UpdatePositionIdType;
   payload: UpdatePositionIdPayloadType;
 }
+interface UpdateModalErrorMessageActionType
+  extends PayloadAction<
+    UpdateModalErrorMessagePayloadType,
+    UpdateModalErrorMessageType
+  > {
+  type: UpdateModalErrorMessageType;
+  payload: UpdateModalErrorMessagePayloadType;
+}
 
 export type GetCodeModalActionTypes =
   | { type: "default" }
   | ToggleCodeModalActionType
   | UpdateSubmitButtonActionType
   | UpdateSubmitStateActionType
-  | UpdatePositionIdActionType;
+  | UpdatePositionIdActionType
+  | UpdateModalErrorMessageActionType;

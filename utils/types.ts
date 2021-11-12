@@ -19,7 +19,7 @@ export interface MapState {
   position: Position;
   direction: Position;
   codeModalEnabled: boolean;
-  errorMessage: string | null;
+  errorMessage: string;
 }
 
 export type GetCodeModalSubmitState = "stop" | "submitting";
@@ -28,7 +28,8 @@ export interface GetCodeModalState {
   modalEnabled: boolean;
   submitButtonEnabled: boolean;
   submitState: GetCodeModalSubmitState;
-  positionId: string | null;
+  positionId: string;
+  errorMessage: string;
 }
 
 /**
