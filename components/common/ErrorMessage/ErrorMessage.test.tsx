@@ -19,41 +19,30 @@ afterEach(() => {
   console.group = cGroup;
 });
 
-const Component = ({ value }: { value: MapSearchStatus }) => {
+const Component = ({ value }: { value: string | null }) => {
   const dispatch = useAppDispatch();
-  dispatch({ type: "search/updateSearchStatus", payload: value });
+  dispatch({ type: "search/updateErrorMessage", payload: { message: value } });
   return null;
 };
-it("should render searching message if search status is 'stop'", () => {
+
+it("should render error message if exists", () => {
+  expect.assertions(1);
+  const { getByText } = render(
+    <Provider store={store}>
+      <ErrorMessage />
+      <Component value={"error!!!"} />
+    </Provider>
+  );
+  expect(getByText("ERROR: error!!!")).toBeTruthy();
+});
+
+it("should render nothing if error message doesn't exist", () => {
   expect.assertions(1);
   const { container } = render(
     <Provider store={store}>
       <ErrorMessage />
-      <Component value={{ status: "stop" }} />
+      <Component value={null} />
     </Provider>
   );
   expect(container.firstChild).toBeNull();
-});
-
-it("should render searching message if search status is 'searching'", () => {
-  expect.assertions(1);
-  const { getByText } = render(
-    <Provider store={store}>
-      <ErrorMessage />
-      <Component value={{ status: "searching" }} />
-    </Provider>
-  );
-  expect(getByText("Searching now...")).toBeTruthy();
-});
-
-it("should render error message if search status is 'error'", () => {
-  expect.assertions(1);
-  const err = "unable to get geolocation!";
-  const { getByText } = render(
-    <Provider store={store}>
-      <ErrorMessage />
-      <Component value={{ status: "error", detail: err }} />
-    </Provider>
-  );
-  expect(getByText(`ERROR: ${err}`)).toBeTruthy();
 });
