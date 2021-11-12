@@ -98,4 +98,23 @@ describe("useGetCodeModal", () => {
       console.error = tmp;
     }
   });
+
+  it("should not update error message if api failed but not Error object thrown", async () => {
+    expect.assertions(1);
+    const tmp = console.error;
+    console.error = jest.fn();
+    const err = "error!";
+    mockGetDestinationByCode.mockImplementation(() => {
+      throw err;
+    });
+    mockSelector.mockReturnValue({ modalEnabled: false, positionId: "xxxxxx" });
+    mockUseRef.mockReturnValue({ current: { value: "mycode" } });
+    const [enabled, get] = useGetCodeModal();
+    try {
+      await get();
+      expect(mockDispatch).toHaveBeenCalledTimes(4);
+    } finally {
+      console.error = tmp;
+    }
+  });
 });

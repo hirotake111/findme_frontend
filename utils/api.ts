@@ -11,7 +11,7 @@ interface CodeRequired {
 }
 interface CreateSuccess {
   result: "success";
-  id: string;
+  link: string;
   position: Position;
 }
 type Result = Success | CodeRequired;
@@ -105,7 +105,11 @@ const createLink = async ({
     if (!(id && typeof id === "string"))
       throw new Error(`validation error - invalid id: ${id}`);
 
-    return { result: "success", id, position };
+    return {
+      result: "success",
+      link: `${config.hostname}/${id}`,
+      position,
+    };
   } catch (e) {
     throw e;
   }

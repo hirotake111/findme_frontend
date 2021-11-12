@@ -111,7 +111,7 @@ describe("createLink", () => {
     mockJson.mockReturnValue(Promise.resolve({ result: "success", detail }));
     expect(await api.createLink(position)).toEqual({
       result: "success",
-      id,
+      link: "http://localhost:4444/xxx",
       position,
     });
   });
@@ -124,7 +124,7 @@ describe("createLink", () => {
     mockJson.mockReturnValue(Promise.resolve({ result: "success", detail }));
     expect(await api.createLink(position)).toEqual({
       result: "success",
-      id,
+      link: "http://localhost:4444/xxx",
       position,
     });
   });
