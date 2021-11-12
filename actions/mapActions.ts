@@ -7,6 +7,7 @@ type UpdateMapSearchStatusType = "search/updateSearchStatus";
 type UpdatePositionType = "search/updatePosition";
 type UpdateDirectionType = "search/updateDirection";
 type ToggleCodeModalType = "search/toggleCodeModal";
+type UpdateErrorMessageType = "search/updateErrorMessage";
 
 /**
  * Payload Types
@@ -17,6 +18,9 @@ interface UpdatePositionPayloadType {
 }
 interface ToggleCodeModalPayloadType {
   codeModalEnabled: boolean;
+}
+interface UpdateErrorMessagePayloadType {
+  message: string | null;
 }
 
 /**
@@ -42,6 +46,11 @@ interface ToggleCodeModalActionType
   type: ToggleCodeModalType;
   payload: ToggleCodeModalPayloadType;
 }
+interface UpdateErrormessageActionType
+  extends PayloadAction<UpdateErrorMessagePayloadType, UpdateErrorMessageType> {
+  type: UpdateErrorMessageType;
+  payload: UpdateErrorMessagePayloadType;
+}
 
 /**
  * combined action types
@@ -51,7 +60,8 @@ export type MapActionTypes =
   | UpdateMapSearchStatusActionType
   | UpdatePositionActionType
   | UpdateDirectionActionType
-  | ToggleCodeModalActionType;
+  | ToggleCodeModalActionType
+  | UpdateErrormessageActionType;
 
 /**
  * Action Creators
@@ -78,5 +88,11 @@ export const toggleCodeModalAction = (
   payload: ToggleCodeModalPayloadType
 ): ToggleCodeModalActionType => ({
   type: "search/toggleCodeModal",
+  payload,
+});
+export const updateErrorMessageAction = (
+  payload: UpdateErrorMessagePayloadType
+): UpdateErrormessageActionType => ({
+  type: "search/updateErrorMessage",
   payload,
 });

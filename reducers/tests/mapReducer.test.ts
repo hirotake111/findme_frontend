@@ -7,6 +7,7 @@ const getFakeMapState = (): MapState => ({
   position: { latitude: -200, longitude: -200 },
   direction: { latitude: -200, longitude: -200 },
   codeModalEnabled: false,
+  errorMessage: null,
 });
 
 it("should return default state", () => {
@@ -55,5 +56,18 @@ it("should enable code modal", () => {
   expect(mapReducer(state, action)).toEqual({
     ...state,
     codeModalEnabled,
+  });
+});
+
+it("should update error message", () => {
+  expect.assertions(1);
+  const state = getFakeMapState();
+  const action: MapActionTypes = {
+    type: "search/updateErrorMessage",
+    payload: { message: "unknown error" },
+  };
+  expect(mapReducer(state, action)).toEqual({
+    ...state,
+    errorMessage: "unknown error",
   });
 });

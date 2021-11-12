@@ -1,6 +1,7 @@
 import {
   toggleCodeModalAction,
   updateDirectionAction,
+  updateErrorMessageAction,
   updateMapSearchStatusAction,
   updatePositionAction,
 } from "../mapActions";
@@ -41,6 +42,16 @@ describe("toggleCodeModalAction", () => {
     expect(toggleCodeModalAction({ codeModalEnabled: true })).toEqual({
       type: "search/toggleCodeModal",
       payload: { codeModalEnabled: true },
+    });
+  });
+});
+
+describe("updateErrorMessageAction", () => {
+  it("should return action", () => {
+    expect.assertions(1);
+    expect(updateErrorMessageAction({ message: "unknown error" })).toEqual({
+      type: "search/updateErrorMessage",
+      payload: { message: "unknown error" },
     });
   });
 });

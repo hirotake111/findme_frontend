@@ -11,6 +11,7 @@ const init: MapState = {
     longitude: -200,
   },
   codeModalEnabled: false,
+  errorMessage: null,
 };
 
 export const mapReducer: MapReducer = (state = init, action) => {
@@ -26,6 +27,9 @@ export const mapReducer: MapReducer = (state = init, action) => {
 
     case "search/toggleCodeModal":
       return { ...state, codeModalEnabled: action.payload.codeModalEnabled };
+
+    case "search/updateErrorMessage":
+      return { ...state, errorMessage: action.payload.message };
 
     default:
       return state;

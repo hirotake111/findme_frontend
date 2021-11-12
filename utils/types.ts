@@ -18,6 +18,7 @@ export interface MapState {
   position: Position;
   direction: Position;
   codeModalEnabled: boolean;
+  errorMessage: string | null;
 }
 
 export type MapReducer = Reducer<MapState, MapActionTypes>;
