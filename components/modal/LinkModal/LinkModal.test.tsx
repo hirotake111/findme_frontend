@@ -12,6 +12,9 @@ jest.mock("../../../hooks/linkModalHooks", () => ({
   useLinkModal: () => mockUseLinkModal(),
 }));
 
+// mock ShareLink
+jest.mock("../../share/ShareLink/ShareLink");
+
 beforeEach(() => {
   mockUseLinkModal.mockClear();
   mockCallback.mockClear();

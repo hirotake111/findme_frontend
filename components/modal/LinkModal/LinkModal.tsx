@@ -3,6 +3,7 @@ import { Box } from "@mui/system";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 
 import { useLinkModal } from "../../../hooks/linkModalHooks";
+import ShareLink from "../../share/ShareLink/ShareLink";
 
 const style = {
   position: "absolute" as "absolute",
@@ -57,18 +58,7 @@ export default function LinkModal() {
         <Typography style={{ color: "#fa86a7" }}>
           {link.errorMessage}
         </Typography>
-        {link.link ? (
-          <p>
-            You can share the link below:
-            <br />
-            <div style={{ display: "flex" }}>
-              <TextField variant="standard" disabled={true} value={link.link} />
-              <ContentCopyIcon />
-            </div>
-          </p>
-        ) : (
-          ""
-        )}
+        <ShareLink link={link.link} />
       </Box>
     </Modal>
   );
