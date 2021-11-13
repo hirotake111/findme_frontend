@@ -1,6 +1,7 @@
 import { useUpdateCurrentPosition } from "../../../hooks/positionHooks";
 
 import LoadingSpinner from "../../common/LoadingSpinner/LoadingSpinner";
+import ShareButton from "../../share/ShareButton/ShareButton";
 import styles from "./Container.module.css";
 
 export default function Container() {
@@ -9,6 +10,9 @@ export default function Container() {
   return latitude === -200 ? (
     <LoadingSpinner />
   ) : (
-    <div className={styles.map} id="map"></div>
+    <>
+      <ShareButton />
+      <div className={styles.map} id="map"></div>
+    </>
   );
 }

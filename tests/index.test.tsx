@@ -8,7 +8,6 @@ import { store } from "../utils/store";
 jest.mock("../components/common/ErrorMessage/ErrorMessage");
 jest.mock("../components/map/Geolocation/Geolocation");
 jest.mock("../components/map/Container/Container");
-jest.mock("../components/share/ShareButton/ShareButton");
 
 it("should render child components", () => {
   expect.assertions(1);

@@ -6,6 +6,9 @@ import { Provider } from "react-redux";
 import { store } from "../../../utils/store";
 import { useAppDispatch } from "../../../hooks/reduxHooks";
 
+// mock components
+jest.mock("../../share/ShareButton/ShareButton");
+
 const consoleLog = console.log;
 const consoleGroup = console.group;
 
