@@ -67,7 +67,7 @@ describe("useLinkModal", () => {
     });
     const [props, textRef, func] = useLinkModal();
     await func();
-    expect(mockDispatch).toHaveBeenCalledTimes(3);
+    expect(mockDispatch).toHaveBeenCalledTimes(4);
   });
 
   it("should send position (without code) and update link", async () => {

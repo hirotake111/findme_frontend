@@ -25,8 +25,11 @@ export const useLinkModal = () => {
     try {
       // POST data
       const result = await api.createLink({ ...position, code });
-      console.log("result:", result);
       // update state
+      dispatch({
+        type: "share/updateErrorMessage",
+        payload: { message: "" },
+      });
       dispatch({
         type: "share/updateLink",
         payload: { link: result.link },
