@@ -12,7 +12,7 @@ This is frontend codebase for my portofolio project [Findme](https://findme.hiro
 ### Required envrionment variables
 
 - NEXT_PUBLIC_GOOGLEMAP_API_KEY: Google Maps API key
-- NEXT_API_SERVER: URL for [API server](https://github.com/hirotake111/findme_api)
+- NEXT_PUBLIC_API_SERVER: URL for [API server](https://github.com/hirotake111/findme_api)
 - NEXT_PUBLIC_FRONTEND_SERVER: FQDN for this frontend server
 
 ### Useful commands
