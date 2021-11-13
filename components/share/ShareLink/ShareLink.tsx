@@ -14,7 +14,9 @@ export default function ShareLink({ link }: { link: string }) {
       {link ? (
         <>
           <label className={styles.linkLabel}>
-            DONE! You can share the link below:
+            DONE! Your link is available for 5 minutes.
+            <br />
+            You can share the link below:
           </label>
           <br />
           <div
@@ -37,9 +39,7 @@ export default function ShareLink({ link }: { link: string }) {
             </div>
           </div>
         </>
-      ) : (
-        ""
-      )}
+      ) : null}
     </>
   );
 }

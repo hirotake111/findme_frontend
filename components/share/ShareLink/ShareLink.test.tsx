@@ -17,6 +17,12 @@ it("should redner link if link exists", () => {
   expect(container.firstChild).toBeTruthy();
 });
 
+it("should not redner link if not exists", () => {
+  expect.assertions(1);
+  const { container } = render(<ShareLink link="" />);
+  expect(container.firstChild).toBeNull();
+});
+
 it("should invoke onClick callback", () => {
   expect.assertions(1);
   const { getByTestId } = render(<ShareLink link={link} />);
