@@ -1,4 +1,7 @@
 import {
+  toggleCodeModalAction,
+  updateDirectionAction,
+  updateErrorMessageAction,
   updateMapSearchStatusAction,
   updatePositionAction,
 } from "../mapActions";
@@ -19,6 +22,36 @@ describe("updatePositionAction", () => {
     expect(updatePositionAction({ latitude: 1, longitude: 2 })).toEqual({
       type: "search/updatePosition",
       payload: { latitude: 1, longitude: 2 },
+    });
+  });
+});
+
+describe("updateDirectionAction", () => {
+  it("should return action", () => {
+    expect.assertions(1);
+    expect(updateDirectionAction({ latitude: 2, longitude: 1 })).toEqual({
+      type: "search/updateDirection",
+      payload: { latitude: 2, longitude: 1 },
+    });
+  });
+});
+
+describe("toggleCodeModalAction", () => {
+  it("should return action", () => {
+    expect.assertions(1);
+    expect(toggleCodeModalAction({ codeModalEnabled: true })).toEqual({
+      type: "search/toggleCodeModal",
+      payload: { codeModalEnabled: true },
+    });
+  });
+});
+
+describe("updateErrorMessageAction", () => {
+  it("should return action", () => {
+    expect.assertions(1);
+    expect(updateErrorMessageAction({ message: "unknown error" })).toEqual({
+      type: "search/updateErrorMessage",
+      payload: { message: "unknown error" },
     });
   });
 });

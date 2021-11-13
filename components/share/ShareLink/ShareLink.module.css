@@ -1,0 +1,25 @@
+.linkLabel {
+  font-size: 0.9rem;
+  color: #0074cd;
+}
+
+.clickPoint {
+  position: absolute;
+  width: 80%;
+  height: 30px;
+  cursor: pointer;
+  z-index: 1;
+}
+.container {
+  display: flex;
+}
+
+.textFieldWrapper {
+  flex: 4;
+}
+
+.copyIconWrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
