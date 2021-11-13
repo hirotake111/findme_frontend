@@ -55,3 +55,19 @@ export const useLinkModal = () => {
 
   return [link, ref, sendPosition] as const;
 };
+
+/**
+ * custom hook to handle share.modalEnabled
+ */
+export const useModalEnabled = () => {
+  const dispatch = useAppDispatch();
+
+  const enable = () => {
+    dispatch({
+      type: "share/updateModal",
+      payload: { enabled: true },
+    });
+  };
+
+  return enable;
+};

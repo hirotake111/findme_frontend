@@ -1,5 +1,5 @@
 import { Position, ShareLinkState } from "../../utils/types";
-import { useLinkModal } from "../linkModalHooks";
+import { useLinkModal, useModalEnabled } from "../linkModalHooks";
 
 // mock dispatch and selector
 const mockDispatch = jest.fn();
@@ -160,5 +160,17 @@ describe("useLinkModal", () => {
     await func();
     expect(mockDispatch).toHaveBeenCalledTimes(2);
     console.error = tmp;
+  });
+});
+
+describe("useModalEnabled", () => {
+  it("should update modalEnabled", () => {
+    expect.assertions(1);
+    const enable = useModalEnabled();
+    enable();
+    expect(mockDispatch).toHaveBeenCalledWith({
+      type: "share/updateModal",
+      payload: { enabled: true },
+    });
   });
 });
