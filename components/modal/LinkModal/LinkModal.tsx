@@ -1,6 +1,5 @@
 import { Button, Modal, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 
 import { useLinkModal } from "../../../hooks/linkModalHooks";
 import ShareLink from "../../share/ShareLink/ShareLink";
@@ -45,6 +44,7 @@ export default function LinkModal() {
           label="Enter code here"
           variant="outlined"
           inputRef={ref}
+          disabled={link.submitStatus !== "stop"}
         />
         <p>
           <Button
