@@ -1,5 +1,9 @@
 import { Position, ShareLinkState } from "../../utils/types";
-import { useLinkModal, useModalEnabled } from "../linkModalHooks";
+import {
+  useCopyMessageHandler,
+  useLinkModal,
+  useModalEnabled,
+} from "../linkModalHooks";
 
 // mock dispatch and selector
 const mockDispatch = jest.fn();
@@ -34,6 +38,7 @@ beforeEach(() => {
     errorMessage: "",
     link: "",
     submitStatus: "stop",
+    copyMessage: false,
   };
 });
 
@@ -171,6 +176,39 @@ describe("useModalEnabled", () => {
     expect(mockDispatch).toHaveBeenCalledWith({
       type: "share/updateModal",
       payload: { enabled: true },
+    });
+  });
+});
+
+describe("useCopyMessageHandler", () => {
+  beforeEach(() => {
+    jest.useFakeTimers();
+  });
+  afterEach(() => {
+    jest.runAllTimers();
+    jest.useRealTimers();
+  });
+
+  it("should return copyMessage and function", () => {
+    expect.assertions(1);
+    mockSelector.mockReturnValue({ copyMessage: false });
+    const func = useCopyMessageHandler();
+    expect(typeof func).toBe("function");
+  });
+
+  test("function dispatches 2 times", () => {
+    expect.assertions(3);
+    const func = useCopyMessageHandler();
+    func();
+    expect(mockDispatch).toHaveBeenCalledWith({
+      type: "share/updateCopyMessage",
+      payload: { enabled: true },
+    });
+    jest.runAllTimers();
+    expect(mockDispatch).toHaveBeenCalledTimes(2);
+    expect(mockDispatch).toHaveBeenCalledWith({
+      type: "share/updateCopyMessage",
+      payload: { enabled: false },
     });
   });
 });

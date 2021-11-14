@@ -71,3 +71,27 @@ export const useModalEnabled = () => {
 
   return enable;
 };
+
+/**
+ * custom hook to handle copy message
+ */
+export const useCopyMessageHandler = () => {
+  const dispatch = useAppDispatch();
+
+  const popUp = () => {
+    // display pop up message
+    dispatch({
+      type: "share/updateCopyMessage",
+      payload: { enabled: true },
+    });
+    setTimeout(() => {
+      // hide the message
+      dispatch({
+        type: "share/updateCopyMessage",
+        payload: { enabled: false },
+      });
+    }, 2000);
+  };
+
+  return popUp;
+};

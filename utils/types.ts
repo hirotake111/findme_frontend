@@ -46,6 +46,7 @@ export interface ShareLinkState {
   errorMessage: string;
   link: string;
   submitStatus: ShareLinkSubmitStatus;
+  copyMessage: boolean;
 }
 
 /**

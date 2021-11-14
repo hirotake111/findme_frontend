@@ -11,6 +11,7 @@ beforeEach(() => {
     errorMessage: "",
     link: "",
     submitStatus: "stop",
+    copyMessage: false,
   };
 });
 
@@ -41,5 +42,17 @@ it("should update status", () => {
   expect(reducer(state, payload)).toEqual({
     ...state,
     submitStatus: "submitting",
+  });
+});
+
+it("should update copy message status", () => {
+  expect.assertions(1);
+  payload = {
+    type: "share/updateCopyMessage",
+    payload: { enabled: true },
+  };
+  expect(reducer(state, payload)).toEqual({
+    ...state,
+    copyMessage: true,
   });
 });
