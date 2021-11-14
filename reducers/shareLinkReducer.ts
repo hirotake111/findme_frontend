@@ -5,6 +5,7 @@ const init: ShareLinkState = {
   errorMessage: "",
   link: "",
   submitStatus: "stop",
+  copyMessage: false,
 };
 
 export const shareLinkReducer: ShareLinkReducer = (state = init, action) => {
@@ -20,6 +21,9 @@ export const shareLinkReducer: ShareLinkReducer = (state = init, action) => {
 
     case "share/updateSubmitStatus":
       return { ...state, submitStatus: action.payload.status };
+
+    case "share/updateCopyMessage":
+      return { ...state, copyMessage: action.payload.enabled };
 
     default:
       return state;

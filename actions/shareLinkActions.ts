@@ -8,6 +8,7 @@ type UpdateModalType = "share/updateModal";
 type UpdateErrorMessageType = "share/updateErrorMessage";
 type UpdateLinkType = "share/updateLink";
 type UpdateSubmitStatusType = "share/updateSubmitStatus";
+type UpdateCopyMessageType = "share/updateCopyMessage";
 
 /**
  * payload types
@@ -23,6 +24,9 @@ interface UpdateLinkPayloadType {
 }
 interface UpdateSubmitStatusPayloadType {
   status: ShareLinkSubmitStatus;
+}
+interface UpdateCopyMessagePayloadType {
+  enabled: boolean;
 }
 
 /**
@@ -48,8 +52,14 @@ interface UpdateSubmitStatusActionType
   type: UpdateSubmitStatusType;
   payload: UpdateSubmitStatusPayloadType;
 }
+interface UpdateCopyMessageActionType
+  extends PayloadAction<UpdateCopyMessagePayloadType, UpdateCopyMessageType> {
+  type: UpdateCopyMessageType;
+  payload: UpdateCopyMessagePayloadType;
+}
 export type ShareLinkActionTypes =
   | UpdateModalActionType
   | UpdateErrorMessageActionType
   | UpdateLinkActionType
-  | UpdateSubmitStatusActionType;
+  | UpdateSubmitStatusActionType
+  | UpdateCopyMessageActionType;
