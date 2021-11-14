@@ -11,6 +11,15 @@ Object.assign(global.navigator, {
   },
 });
 
+// mock useCopyMessageHandler hook
+const mockHook = jest.fn();
+jest.mock("../../../hooks/linkModalHooks", () => ({
+  useCopyMessageHandler: () => mockHook,
+}));
+
+// mock components
+jest.mock("../CopyMessage/CopyMessage");
+
 it("should redner link if link exists", () => {
   expect.assertions(1);
   const { container } = render(<ShareLink link={link} />);
@@ -23,9 +32,10 @@ it("should not redner link if not exists", () => {
   expect(container.firstChild).toBeNull();
 });
 
-it("should invoke onClick callback", () => {
-  expect.assertions(1);
+it("should invoke handleclick callback", () => {
+  expect.assertions(2);
   const { getByTestId } = render(<ShareLink link={link} />);
   fireEvent.click(getByTestId("clickevent"));
   expect(mockWriteText).toHaveBeenCalledWith(link);
+  expect(mockHook).toHaveBeenCalledTimes(1);
 });

@@ -190,16 +190,15 @@ describe("useCopyMessageHandler", () => {
   });
 
   it("should return copyMessage and function", () => {
-    expect.assertions(2);
+    expect.assertions(1);
     mockSelector.mockReturnValue({ copyMessage: false });
-    const [enabled, func] = useCopyMessageHandler();
-    expect(enabled).toBe(false);
+    const func = useCopyMessageHandler();
     expect(typeof func).toBe("function");
   });
 
   test("function dispatches 2 times", () => {
     expect.assertions(3);
-    const [_, func] = useCopyMessageHandler();
+    const func = useCopyMessageHandler();
     func();
     expect(mockDispatch).toHaveBeenCalledWith({
       type: "share/updateCopyMessage",

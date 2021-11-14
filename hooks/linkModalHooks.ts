@@ -77,7 +77,6 @@ export const useModalEnabled = () => {
  */
 export const useCopyMessageHandler = () => {
   const dispatch = useAppDispatch();
-  const { copyMessage } = useAppSelector((state) => state.link);
 
   const popUp = () => {
     // display pop up message
@@ -94,5 +93,5 @@ export const useCopyMessageHandler = () => {
     }, 2000);
   };
 
-  return [copyMessage, popUp] as const;
+  return popUp;
 };

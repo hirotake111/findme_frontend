@@ -1,21 +1,20 @@
+import { MouseEventHandler } from "react";
 import { TextField } from "@mui/material";
 import ContentCopyRoundedIcon from "@mui/icons-material/ContentCopyRounded";
-import styles from "./ShareLink.module.css";
-import { MouseEventHandler } from "react";
+
 import CopyMessage from "../CopyMessage/CopyMessage";
-import { useAppDispatch } from "../../../hooks/reduxHooks";
+import { useCopyMessageHandler } from "../../../hooks/linkModalHooks";
+
+import styles from "./ShareLink.module.css";
 
 export default function ShareLink({ link }: { link: string }) {
-  const dispatch = useAppDispatch();
+  const popUp = useCopyMessageHandler();
 
   const handleclick: MouseEventHandler = () => {
     // copy link to clipboard
     navigator.clipboard.writeText(link);
-    // update copy message
-    dispatch({
-      type: "share/updateCopyMessage",
-      payload: { enabled: true },
-    });
+    // show message
+    popUp();
   };
 
   return (
@@ -26,7 +25,7 @@ export default function ShareLink({ link }: { link: string }) {
           <label className={styles.linkLabel}>
             DONE! Your link is available for 5 minutes.
             <br />
-            You can share the link below:
+            You can click/tap link below to share:
           </label>
           <br />
           <div
